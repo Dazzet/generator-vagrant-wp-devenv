@@ -1,0 +1,24 @@
+# Cache Files
+.vagrant
+.wp-cli
+.DS_Store
+
+# Dirs
+html
+backups
+
+# Wordpress
+wp/.htaccess
+wp/*
+!wp/wp-content
+wp/wp-content/*
+!wp/wp-content/themes/
+wp/wp-content/themes/twent*
+wp/wp-content/themes/genesis
+wp/wp-content/themes/index.php
+wp/wp-content/themes/<%= projectName %>-<%= projectYear %>/style.css
+wp/wp-content/themes/<%= projectName %>-<%= projectYear %>/scripts.js
+
+# Gulp, bower, etc
+node_modules
+yarn.lock

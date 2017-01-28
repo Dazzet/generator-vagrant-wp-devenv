@@ -1,0 +1,42 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+name = "<%= projectName %>"
+host_ip = "<%= hostIP %>"
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.network "private_network", ip: host_ip
+  config.vm.hostname = name + ".dev"
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.gui = false
+    vb.memory = "1024"
+  end
+
+  # Copiar archivos de configuración dentro de la VM
+  config.vm.provision "file", source: "ops/", destination: "/tmp/"
+  config.vm.provision "file", source: "installers/", destination: "/tmp/"
+
+  # Acelerar el proceso de compartir archivos entre local y VM
+  if Vagrant.has_plugin?('vagrant-bindfs')
+    config.vm.synced_folder "./", "/mnt/vagrant-base", id: "repo", type: 'nfs',
+      perms: "u=rwX:g=rwX:o=rD"
+    config.bindfs.bind_folder "/mnt/vagrant-base", "/var/www/",
+      owner: 'www-data',
+      group: 'vagrant',
+      perms: "u=rwX:g=rwX:o=rD"
+  else
+    config.vm.synced_folder "./", "/var/www/",
+      owner: "www-data",
+      group: "vagrant",
+      perms: "u=rwX:g=rwX:o=rD"
+  end
+
+  # Instalar servidor web, mysql, php, etc
+  config.vm.provision :shell, :path => "ops/provision-vagrant.sh"
+
+  # Instalar Wordpress y sus plugins
+  config.vm.provision :shell, :path => "ops/provision-wordpress.sh"
+
+end
