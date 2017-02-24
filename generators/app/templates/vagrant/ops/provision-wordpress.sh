@@ -57,17 +57,17 @@ runAs ./wp plugin install recent-posts-widget-extended
 runAs ./wp plugin install tinymce-advanced
 runAs ./wp plugin install widget-css-classes
 
-# Install Genesis plugins
-runAs ./wp plugin install genesis-404-page
-runAs ./wp plugin install genesis-translations
-runAs ./wp plugin install genesis-simple-edits
-runAs ./wp plugin install genesis-visual-hook-guide
+# Install Genesis plugins (UNcomment if your are using Genesis Framework)
+# runAs ./wp plugin install genesis-404-page
+# runAs ./wp plugin install genesis-translations
+# runAs ./wp plugin install genesis-simple-edits
+# runAs ./wp plugin install genesis-visual-hook-guide
 
 # SiteOrigin plugins
 runAs ./wp plugin install siteorigin-panels
 runAs ./wp plugin install so-widgets-bundle
 
-# Instasll import/export plugins
+# Install import/export plugins
 runAs ./wp plugin install options-importer
 runAs ./wp plugin install wordpress-importer
 runAs ./wp plugin install widget-settings-importexport
@@ -80,8 +80,11 @@ runAs ./wp core language update
 runAs ./wp plugin uninstall akismet
 runAs ./wp plugin uninstall hello
 
-# Install templates and local plugins
-runAs ./wp theme install --force /tmp/installers/genesis*.zip
+# Install local themes
+runAs ./wp theme install --force /tmp/installers/themes/*.zip
+
+# Install local plugins
+runAs ./wp theme install --force /tmp/installers/plugins/*.zip
 
 # Activate themes
 runAs ./wp theme activate "<%= projectName %>-<%= projectYear %>"
@@ -89,8 +92,8 @@ runAs ./wp theme activate "<%= projectName %>-<%= projectYear %>"
 # Activate plugins
 runAs ./wp plugin activate --all
 
-# Remove widgets
- runAs ./wp widget delete `runAs ./wp widget list header-right`
+# Remove Wordpress default widgets
+# runAs ./wp widget delete `runAs ./wp widget list header-right`
 
 sudo service nginx restart
 

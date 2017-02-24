@@ -8,9 +8,9 @@ define( 'CHILD_THEME_VERSION', '0.1.0' );
 
 //* Enqueue scripts and styles
 add_action( 'wp_enqueue_scripts', function() {
-    wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Anton|Questrial|Roboto:300,500,900', array(), CHILD_THEME_VERSION );
-    wp_enqueue_script( 'theme-js', get_stylesheet_directory_uri() . '/theme.min.js', array('jquery'), CHILD_THEME_VERSION, true);
-    wp_deregister_script( 'superfish'  );
+    wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Roboto', array(), CHILD_THEME_VERSION );
+    wp_enqueue_script( 'theme-js', get_stylesheet_directory_uri() . '/script.min.js', array('jquery'), CHILD_THEME_VERSION, true);
+    wp_deregister_script( 'superfish'  ); // Remove superfish on genesis
     wp_deregister_script( 'superfish-args'  );
 }, 999);
 
@@ -27,9 +27,9 @@ add_image_size( 'featured-page', 1140, 400, TRUE );
 add_image_size( 'blog-image-md', 640, 480, TRUE );
 add_image_size( 'blog-image-lg', 800, 600, TRUE );
 add_filter('image_size_names_choose', function($sizes) {
-    $sizes['featured-page'] = __('Featured Page', '<%= projectName %>');
-    $sizes['blog-image-md'] = __('Imagen 800x600', '<%= projectName %>');
-    $sizes['blog-image-lg'] = __('Blog Images', '<%= projectName %>');
+    $sizes['featured-page'] = __('Hero Image', '<%= projectName %>');
+    $sizes['blog-image-md'] = __('Medium blog image', '<%= projectName %>');
+    $sizes['blog-image-lg'] = __('Semi-large blog image', '<%= projectName %>');
     return $sizes;
 });
 
@@ -43,7 +43,7 @@ unregister_sidebar( 'sidebar-alt' );
 add_theme_support( 'custom-header', array(
 	'flex-height'     => true,
 	'width'           => 360,
-	'height'          => 76,
+	'height'          => 222, // Golden Ratio: http://www.miniwebtool.com/golden-section-calculator/
 	'header-selector' => '.site-title a',
 	'header-text'     => false,
 ) );
