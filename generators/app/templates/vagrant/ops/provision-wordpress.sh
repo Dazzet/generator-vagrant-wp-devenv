@@ -49,10 +49,9 @@ touch ${INDIR}/nginx.conf && chmod 777 ${INDIR}/nginx.conf
 
 # Install remote plugins
 runAs ./wp plugin install better-font-awesome
-runAs ./wp plugin install contact-form-7
+runAs ./wp plugin install caldera-forms
 runAs ./wp plugin install enhanced-media-library
 runAs ./wp plugin install image-widget
-runAs ./wp plugin install really-simple-captcha
 runAs ./wp plugin install recent-posts-widget-extended
 runAs ./wp plugin install tinymce-advanced
 runAs ./wp plugin install widget-css-classes
@@ -73,8 +72,6 @@ runAs ./wp plugin install wordpress-importer
 runAs ./wp plugin install widget-settings-importexport
 runAs ./wp plugin install better-search-replace
 
-# Instalar traducciones
-runAs ./wp core language update
 
 # Remove default plugins and themes
 runAs ./wp plugin uninstall akismet
@@ -86,8 +83,11 @@ runAs ./wp theme install --force /tmp/installers/themes/*.zip
 # Install local plugins
 runAs ./wp theme install --force /tmp/installers/plugins/*.zip
 
+# Update language
+runAs ./wp core language update
+
 # Activate themes
-runAs ./wp theme activate "<%= projectName %>-<%= projectYear %>"
+#runAs ./wp theme activate "<%= projectName %>-<%= projectYear %>"
 
 # Activate plugins
 runAs ./wp plugin activate --all
@@ -97,8 +97,8 @@ runAs ./wp plugin activate --all
 
 sudo service nginx restart
 
-echo "NO OLVIDES ACTUALIZAR LAS TRADUCCIONES DE WORDPRESS!!!!"
-echo "http://${DOMAIN}/wp-admin/update-core.php"
+echo "Installation done. Access your server on http://<%= hostIP %>"
+
 
 
 # vim: ts=4 sw=4 sts=4 sr et
