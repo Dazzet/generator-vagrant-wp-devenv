@@ -1,6 +1,6 @@
 {
-  "name": "generator-vagrant-wp-devenv",
-  "version": "0.1.0",
+  "name": "generator-vagrant-wp-dev",
+  "version": "0.2.0",
   "description": "Creates a Vagrant machine for wordpress development environment",
   "homepage": "http://dazzet.co",
   "author": {
@@ -44,7 +44,7 @@
       "mocha": true
     }
   },
-  "repository": "marioy47/generator-vagrant-wp-devenv",
+  "repository": "dazzet/generator-vagrant-wp-dev",
   "scripts": {
     "prepublish": "gulp prepublish",
     "test": "gulp"

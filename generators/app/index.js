@@ -1,31 +1,31 @@
 'use strict';
 var Generator = require('yeoman-generator');
-var chalk = require('chalk');
-var yosay = require('yosay');
+var chalk     = require('chalk');
+var yosay     = require('yosay');
 
 module.exports = Generator.extend({
 
   prompting: function () {
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the' + chalk.yellow(' generator-vagrant-wp-devenv ') + ' generator!'
+      'Welcome to the' + chalk.yellow(' generator-vagrant-wp-dev ') + ' generator!'
     ));
 
     var prompts = [{
-      type: 'input',
-      name: 'projectName',
-      message: 'What is the name of the project (single word)? ',
-      default: this.appname,
-      required: true,
-      store: true
+      type     : 'input',
+      name     : 'projectName',
+      message  : 'What is the name of the project (will be used as a template name)? ',
+      default  : this.appname,
+      required : true,
+      store    : true
     },
     {
-      type: 'String',
-      name: 'hostIP',
-      message: 'What is the IP of the Virtual Machine? ',
-      default: '192.168.33.30',
-      required: true,
-      store: true
+      type     : 'String',
+      name     : 'hostIP',
+      message  : 'What is the IP of the Virtual Machine? ',
+      default  : '192.168.33.30',
+      required : true,
+      store    : true
     }
     ];
 
